@@ -1,21 +1,4 @@
-@php
-    $iconval = 'heroicon-o-camera';
-@endphp
-
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
-<head>
-    <title>サンドボックス</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/css/app.css')
-</head>
-
-<body class='bg-surface'>
-    <h1>サンドボックス</h1>
-
-    <p>サンドボックスです。</p>
+<x-layout title='Sanxbox'>
     <div class='flex flex-col gap-3'>
         <div>
             <x-button variant='filled' color='primary'>Filled Primary</x-button>
@@ -67,14 +50,10 @@
                 Outlined Tertiary
             </x-button>
         </div>
-        <div>
-            <x-text-field id='hoge' label='hoge' class="ma" />
-            <x-text-area id='foo' rows='5' label='bar' />
-        </div>
-        <div>
-            <x-icon :name="$iconval" class="w-6 h-6 text-red-900" />
+        <div class='grid gap-4'>
+            <x-text-field id='foo' label='foo label' supportingText='Supporting Text' />
+            <x-text-field id='bar' label='bar label' icon='magnifying-glass' supportingText='Supporting Text' />
+            <x-text-field id='multiline' label='multiline' multiline icon="magnifying-glass" />
         </div>
     </div>
-</body>
-
-</html>
+</x-layout>

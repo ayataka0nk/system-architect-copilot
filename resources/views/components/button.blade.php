@@ -1,5 +1,5 @@
 @php
-  // {{-- blade-formatter-disable --}}
+    // {{-- blade-formatter-disable --}}
     $commonClasses = [
         'relative',
         'inline-flex',
@@ -43,7 +43,7 @@
                 'text-sm',
                 'font-semibold',
                 'shadow-sm',
-                'before:bg-ripple-radial-gradient',
+                'before:bg-ripple-white',
             ],
             'outlined' => [
                 'bg-surface',
@@ -95,19 +95,22 @@
                 'text-primary',
                 'hover:after:bg-primary',
                 'active:after:bg-primary',
-                'focus-visible:after:bg-primary'
+                'focus-visible:after:bg-primary',
+                'before:bg-ripple-primary'
             ],
             'secondary' => [
                 'text-secondary',
                 'hover:after:bg-secondary',
                 'active:after:bg-secondary',
-                'focus-visible:after:bg-secondary'
+                'focus-visible:after:bg-secondary',
+                'before:bg-ripple-secondary'
             ],
             'tertiary' => [
                 'text-tertiary',
                 'hover:after:bg-tertiary',
                 'active:after:bg-tertiary',
-                'focus-visible:after:bg-tertiary'
+                'focus-visible:after:bg-tertiary',
+                'before:bg-ripple-tertiary'
             ]
         };
     } elseif ($variant === 'text') {
@@ -116,37 +119,39 @@
                 'text-primary',
                 'hover:after:bg-primary',
                 'active:after:bg-primary',
-                'focus-visible:after:bg-primary'
+                'focus-visible:after:bg-primary',
+                'before:bg-ripple-primary'
             ],
             'secondary' => [
                 'text-secondary',
                 'hover:after:bg-secondary',
                 'active:after:bg-secondary',
-                'focus-visible:after:bg-secondary'
+                'focus-visible:after:bg-secondary',
+                'before:bg-ripple-secondary'
             ],
             'tertiary' => [
                 'text-tertiary',
                 'hover:after:bg-tertiary',
                 'active:after:bg-tertiary',
-                'focus-visible:after:bg-tertiary'
+                'focus-visible:after:bg-tertiary',
+                'before:bg-ripple-tertiary'
             ]
         };
     }
   // {{-- blade-formatter-enable --}}
 
-  if ($icon !== null) {
-      $classesWithIcon = ['pl-4'];
-  } else {
-      $classesWithIcon = [];
-  }
-  $iconName = 'heroicon-o-' . $icon;
-  $class = implode(' ', array_merge($commonClasses, $variantClasses, $colorClasses, $classesWithIcon));
+    if ($icon !== null) {
+        $classesWithIcon = ['pl-4'];
+    } else {
+        $classesWithIcon = [];
+    }
+    $iconName = 'heroicon-o-' . $icon;
+    $class = implode(' ', array_merge($commonClasses, $variantClasses, $colorClasses, $classesWithIcon));
 @endphp
 
 <button {{ $attributes->class([$class]) }}>
-  @if ($icon !== null)
-    <x-icon :name="$iconName"
-      class="h-6 w-6" />
-  @endif
-  <div>{{ $slot }}</div>
+    @if ($icon !== null)
+        <x-icon :name="$iconName" class="h-6 w-6" />
+    @endif
+    <div>{{ $slot }}</div>
 </button>

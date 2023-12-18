@@ -39,8 +39,23 @@ export default {
         1000: '10',
       },
       backgroundImage: {
-        'ripple-radial-gradient':
-          'radial-gradient(circle, #fff 10%, transparent 10.01%)',
+        'ripple-white': 'radial-gradient(circle, #fff 10%, transparent 10.01%)',
+        'ripple-primary':
+          'radial-gradient(circle, #335ca8 10%, transparent 10.01%)',
+        'ripple-secondary':
+          'radial-gradient(circle, #90427a 10%, transparent 10.01%)',
+        'ripple-tertiary':
+          'radial-gradient(circle, #6750a4 10%, transparent 10.01%)',
+      },
+      inset: {
+        13: '3.25rem',
+      },
+      padding: {
+        13: '3.25rem',
+      },
+      boxShadow: {
+        'underline-thin': '0 1px 0 0 black',
+        'underline-thick': '0 2px 0 0 black',
       },
     },
   },
