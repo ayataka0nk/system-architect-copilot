@@ -1,4 +1,4 @@
-<x-layout title='Sanxbox'>
+<x-layouts.guest title='Sanxbox'>
     <div class='flex flex-col gap-3'>
         <div>
             <x-button variant='filled' color='primary'>Filled Primary</x-button>
@@ -56,4 +56,4 @@
             <x-text-field id='multiline' label='multiline' multiline icon="magnifying-glass" />
         </div>
     </div>
-</x-layout>
+</x-layouts.guest>

@@ -16,7 +16,8 @@ class TextField extends Component
         public string $variant = 'filled',
         public ?string $icon = null,
         public ?string $supportingText = null,
-        public bool $multiline = false
+        public bool $multiline = false,
+        public ?string $error = null
     ) {
         //
     }

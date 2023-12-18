@@ -17,5 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
+Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
+
+
+
+Route::middleware('auth')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
 
 Route::get('/sandbox', [\App\Http\Controllers\SandboxController::class, 'top']);

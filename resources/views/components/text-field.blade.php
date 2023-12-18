@@ -21,6 +21,7 @@
             'peer-focus:top-2',
         ];
         $inputBaseClasses = [
+   
             'peer',
             'w-full',
             'block',
@@ -36,15 +37,27 @@
             'focus:shadow-underline-thick',
             'focus:shadow-primary',
             'line-height-0',
-            'cursor-pointer'
+            'cursor-pointer',
         ];
         $supportingTextBaseClasses = [
+            'h-4',
             'text-xs',
             'text-on-surface-variant',
             'mt-1',
             'leading-none',
             'pl-4'
         ];
+
+        if($error){
+            $labelBaseClasses[] = 'peer-placeholder-shown:text-error';
+            $labelBaseClasses[] = 'text-error';
+            $labelBaseClasses[] = 'peer-focus:text-error';
+            $inputBaseClasses[] = 'shadow-error';
+            $inputBaseClasses[] = 'focus:shadow-error';
+            $supportingTextBaseClasses[] = 'text-error';
+        }
+      
+
         if ($icon === null) {
             $labelIconClasses = [
                 // 入力値無し
@@ -85,7 +98,7 @@
     $rootClass = implode(' ', $rootBaseClasses);
     $inputClass = implode(' ', array_merge($inputBaseClasses, $inputIconClasses, $inputMultilineClasses));
     $labelClass = implode(' ', array_merge($labelBaseClasses, $labelIconClasses));
-    $supportingIconClass = implode(' ', $supportingTextBaseClasses);
+    $supportingIconClass = implode(' ', array_merge($supportingTextBaseClasses));
   // {{-- blade-formatter-enable --}}
 @endphp
 
@@ -96,22 +109,28 @@
         textarea.style.height = textarea.scrollHeight + 'px';
     }
 }">
-    @if ($multiline)
-        <textarea {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} class ="{{ $inputClass }}"
-            x-on:input="autoresize" rows="1"></textarea>
-    @else
-        <input {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} class="{{ $inputClass }}">
-    @endif
+    <div
+        class='hover:after:full-width relative hover:after:pointer-events-none hover:after:absolute hover:after:inset-0 hover:after:bg-on-surface hover:after:opacity-8'>
+        @if ($multiline)
+            <textarea {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} class ="{{ $inputClass }}"
+                x-on:input="autoresize" rows="1"></textarea>
+        @else
+            <input {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} class="{{ $inputClass }}">
+        @endif
 
-    @if ($label)
-        <label class="{{ $labelClass }}" for="{{ $attributes->get('id') }}">{{ $label }}</label>
-    @endif
-    @if ($icon)
-        <x-icon :name="$iconName" class="pointer-events-none absolute left-3 top-4 h-6 w-6" />
-    @endif
+        @if ($label)
+            <label class="{{ $labelClass }}" for="{{ $attributes->get('id') }}">{{ $label }}</label>
+        @endif
+        @if ($icon)
+            <x-icon :name="$iconName" class="pointer-events-none absolute left-3 top-4 h-6 w-6" />
+        @endif
+    </div>
     <p class="{{ $supportingIconClass }}">
         @if ($supportingText)
             {{ $supportingText }}
+        @endif
+        @if ($error)
+            {{ $error }}
         @endif
     </p>
 </div>
