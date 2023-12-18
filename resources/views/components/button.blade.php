@@ -145,7 +145,12 @@
     } else {
         $classesWithIcon = [];
     }
-    $iconName = 'heroicon-o-' . $icon;
+
+    $iconName = match ($variant) {
+        'filled' => 'heroicon-s-' . $icon,
+        'outlined' => 'heroicon-o-' . $icon,
+        'text' => 'heroicon-o-' . $icon,
+    };
     $class = implode(' ', array_merge($commonClasses, $variantClasses, $colorClasses, $classesWithIcon));
 @endphp
 
@@ -153,5 +158,5 @@
     @if ($icon !== null)
         <x-icon :name="$iconName" class="h-6 w-6" />
     @endif
-    <div>{{ $slot }}</div>
+    <p>{{ $slot }}</p>
 </button>

@@ -46,6 +46,8 @@ export default {
           'radial-gradient(circle, #90427a 10%, transparent 10.01%)',
         'ripple-tertiary':
           'radial-gradient(circle, #6750a4 10%, transparent 10.01%)',
+        'ripple-surface-variant':
+          'radial-gradient(circle, #44474f 10%, transparent 10.01%)',
       },
       inset: {
         13: '3.25rem',

@@ -10,10 +10,46 @@
     @vite('resources/js/app.js')
 </head>
 
-<body class='bg-surface'>
-    <header>ヘッダ</header>
-    <h1>{{ $title }}</h1>
-    {{ $slot }}
+<body class="bg-surface">
+    <div x-data="{
+        showNav: false,
+        toggleNav(event) {
+            this.showNav = !this.showNav
+        }
+    }">
+        <x-layouts.user.header />
+        <x-layouts.user.navigation class='fixed left-0 top-0 overflow-y-auto' />
+        <section>
+            <h1>{{ $title }}</h1>
+            <div>
+                {{ $slot }}
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+                <div>dummy</div>
+            </div>
+        </section>
+    </div>
 </body>
 
 </html>

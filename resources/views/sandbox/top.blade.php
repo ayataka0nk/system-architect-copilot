@@ -50,10 +50,28 @@
                 Outlined Tertiary
             </x-button>
         </div>
+        <div>
+            <x-button variant='filled' color='primary' icon='camera'>
+                Filled Icon
+            </x-button>
+            <x-button variant='outlined' color='primary' icon='camera'>
+                Outlined Icon
+            </x-button>
+            <x-button variant='text' color='primary' icon='camera'>
+                Outlined Icon
+            </x-button>
+        </div>
+        <div>
+            <x-icon-button variant='standard' icon='camera' />
+            <x-icon-button variant='standard' icon='camera' :active="true" />
+            <x-icon-button variant='standard' icon='camera' color='secondary' :active="true" />
+            <x-icon-button variant='standard' icon='camera' color='tertiary' :active="true" />
+        </div>
         <div class='grid gap-4'>
             <x-text-field id='foo' label='foo label' supportingText='Supporting Text' />
             <x-text-field id='bar' label='bar label' icon='magnifying-glass' supportingText='Supporting Text' />
             <x-text-field id='multiline' label='multiline' multiline icon="magnifying-glass" />
         </div>
+
     </div>
 </x-layouts.guest>
