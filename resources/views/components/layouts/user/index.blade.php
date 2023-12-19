@@ -19,9 +19,7 @@
     }">
         <x-layouts.user.header />
         <x-layouts.user.navigation class='fixed left-0 top-0 overflow-y-auto' />
-        <section>
-            {{ $slot }}
-        </section>
+        {{ $slot }}
     </div>
 </body>
 

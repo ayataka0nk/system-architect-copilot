@@ -4,6 +4,7 @@
             // 共通
             'absolute',
             'cursor-pointer',
+            'pointer-events-none',
             // 入力値無し
             'peer-placeholder-shown:top-3.5',
             'peer-placeholder-shown:text-lg',
@@ -99,6 +100,7 @@
             'mt-1',
             'leading-none',
             'pl-4',
+            'h-4',
         ];
 
         if ($error) {
@@ -114,16 +116,19 @@
 
 <div {{ $attributes->class(['relative'])->only('class') }} x-data="{
     autoresize(event) {
+        if (typeof event?.target === 'undefined') {
+            return
+        }
         const textarea = event.target;
         textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + 'px';
     }
-}">
+}" x-init="autoresize({ target: $refs.textarea })">
     <div
         class='hover:after:full-width relative hover:after:pointer-events-none hover:after:absolute hover:after:inset-0 hover:after:bg-on-surface hover:after:opacity-8'>
         @if ($multiline)
             <textarea {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} @class($inputStyles)
-                x-on:input="autoresize" rows="1"></textarea>
+                x-on:input="autoresize" x-init="autoresize({ target: $el })" rows="1">{{ $attributes->get('value') }}</textarea>
         @else
             <input {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} @class($inputStyles)>
         @endif

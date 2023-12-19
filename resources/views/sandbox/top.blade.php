@@ -77,8 +77,12 @@
         <div class='grid gap-4'>
             <x-text-field id='foo' label='foo label' supportingText='Supporting Text' />
             <x-text-field id='bar' label='bar label' icon='magnifying-glass' supportingText='Supporting Text' />
+            <x-text-field id='baz' label='baz label' error='Supporting Text' />
             <x-text-field id='multiline' label='multiline' multiline icon="magnifying-glass" />
         </div>
-
+        <div>
+            <x-card>Card Sample</x-card>
+            <x-card href="hoge">Card Link Sample</x-card>
+        </div>
     </div>
 </x-layouts.guest>
