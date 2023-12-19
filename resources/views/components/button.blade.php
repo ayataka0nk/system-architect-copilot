@@ -152,11 +152,21 @@
         'text' => 'heroicon-o-' . $icon,
     };
     $class = implode(' ', array_merge($commonClasses, $variantClasses, $colorClasses, $classesWithIcon));
+
 @endphp
 
-<button {{ $attributes->class([$class]) }}>
-    @if ($icon !== null)
-        <x-icon :name="$iconName" class="h-6 w-6" />
-    @endif
-    <p>{{ $slot }}</p>
-</button>
+@if ($href)
+    <a href="{{ $href }}" {{ $attributes->class([$class]) }}>
+        @if ($icon !== null)
+            <x-icon :name="$iconName" class="h-6 w-6" />
+        @endif
+        <p>{{ $slot }}</p>
+    </a>
+@else
+    <button {{ $attributes->class([$class]) }}>
+        @if ($icon !== null)
+            <x-icon :name="$iconName" class="h-6 w-6" />
+        @endif
+        <p>{{ $slot }}</p>
+    </button>
+@endif

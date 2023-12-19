@@ -20,8 +20,9 @@ Route::get('/', function () {
 Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
 
+Route::resource('projects', \App\Http\Controllers\ProjectController::class);
 
 
-Route::middleware('auth')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
+Route::middleware('auth')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
-Route::get('/sandbox', [\App\Http\Controllers\SandboxController::class, 'top']);
+Route::get('/sandbox', [\App\Http\Controllers\SandboxController::class, 'top'])->name('sandbox');

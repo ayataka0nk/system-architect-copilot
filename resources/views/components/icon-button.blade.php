@@ -8,7 +8,8 @@
         'w-12',
         'items-center',
         'justify-center',
-        'group'
+        'group',
+        'focus-visible:outline-none',
     ];
     $wrapperBaseClasses = [
         'relative',

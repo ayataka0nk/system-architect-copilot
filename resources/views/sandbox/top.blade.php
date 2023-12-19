@@ -62,11 +62,18 @@
             </x-button>
         </div>
         <div>
+            <x-button variant='filled' color='primary' icon='camera' :href="route('sandbox')">
+                Filled Icon
+            </x-button>
+
+        </div>
+        <div>
             <x-icon-button variant='standard' icon='camera' />
             <x-icon-button variant='standard' icon='camera' :active="true" />
             <x-icon-button variant='standard' icon='camera' color='secondary' :active="true" />
-            <x-icon-button variant='standard' icon='camera' color='tertiary' :active="true" />
+            <x-icon-button variant='standard' icon='camera' color='tertiary' :active="true" id='standard-camera' />
         </div>
+
         <div class='grid gap-4'>
             <x-text-field id='foo' label='foo label' supportingText='Supporting Text' />
             <x-text-field id='bar' label='bar label' icon='magnifying-glass' supportingText='Supporting Text' />

@@ -1,27 +1,58 @@
 @php
-    // {{-- blade-formatter-disable --}}
-    if($variant === 'filled') {
-        $rootBaseClasses = [
-            'relative',
- 
-        ];
-        $labelBaseClasses = [
+    if ($variant === 'filled') {
+        $labelStyles = [
+            // 共通
             'absolute',
-            'text-primary',
             'cursor-pointer',
             // 入力値無し
-            'peer-placeholder-shown:text-on-surface-variant',
-            'peer-placeholder-shown:text-lg',
             'peer-placeholder-shown:top-3.5',
+            'peer-placeholder-shown:text-lg',
             // 入力値あり
             'top-2',
             'text-xs',
             // フォーカス
-            'peer-focus:text-primary',
             'peer-focus:top-2',
+            'peer-focus:text-xs',
         ];
-        $inputBaseClasses = [
-   
+
+        if ($icon) {
+            $labelStyles = array_merge($labelStyles, [
+                // 入力値無し
+                'peer-placeholder-shown:left-13',
+                // 入力値あり
+                'left-13',
+            ]);
+        } else {
+            $labelStyles = array_merge($labelStyles, [
+                // 入力値無し
+                'peer-placeholder-shown:left-4',
+                // 入力値あり
+                'left-4',
+            ]);
+        }
+
+        if ($error) {
+            $labelStyles = array_merge($labelStyles, [
+                // 入力値無し
+                'peer-placeholder-shown:text-error',
+                // 入力値あり
+                'text-error',
+                // フォーカス
+                'peer-focus:text-error',
+            ]);
+        } else {
+            $labelStyles = array_merge($labelStyles, [
+                // 入力値無し
+                'peer-placeholder-shown:text-on-surface-variant',
+                // 入力値あり
+                'text-on-surface-variant',
+                // フォーカス
+                'peer-focus:text-primary',
+            ]);
+        }
+
+        $inputStyles = [
+            // 共通
             'peer',
             'w-full',
             'block',
@@ -33,76 +64,55 @@
             'outline-none',
             'placeholder-transparent',
             'shadow-underline-thin',
-            'shadow-primary',
             'focus:shadow-underline-thick',
-            'focus:shadow-primary',
             'line-height-0',
             'cursor-pointer',
         ];
-        $supportingTextBaseClasses = [
-            'h-4',
+
+        if ($error) {
+            $inputStyles = array_merge($inputStyles, [
+                // エラーあり
+                'shadow-error',
+                'focus:shadow-error',
+            ]);
+        } else {
+            $inputStyles = array_merge($inputStyles, [
+                // エラーなし
+                'shadow-primary',
+                'focus:shadow-primary',
+            ]);
+        }
+
+        if ($icon) {
+            $inputStyles[] = 'pl-13';
+        } else {
+            $inputStyles[] = 'pl-4';
+        }
+
+        if ($multiline) {
+            $inputStyles[] = 'resize-none';
+        }
+
+        $supportingTextStyles = [
+            // 共通
             'text-xs',
-            'text-on-surface-variant',
             'mt-1',
             'leading-none',
-            'pl-4'
+            'pl-4',
         ];
 
-        if($error){
-            $labelBaseClasses[] = 'peer-placeholder-shown:text-error';
-            $labelBaseClasses[] = 'text-error';
-            $labelBaseClasses[] = 'peer-focus:text-error';
-            $inputBaseClasses[] = 'shadow-error';
-            $inputBaseClasses[] = 'focus:shadow-error';
-            $supportingTextBaseClasses[] = 'text-error';
-        }
-      
-
-        if ($icon === null) {
-            $labelIconClasses = [
-                // 入力値無し
-                'peer-placeholder-shown:left-4',
-                // 入力値あり
-                'left-4',
-                // フォーカス
-                'peer-focus:top-2',
-                'peer-focus:text-xs',
-            ];
-            $inputIconClasses = [
-                'pl-4'
-            ];
-
+        if ($error) {
+            $supportingTextStyles[] = 'text-error';
         } else {
-            $labelIconClasses = [
-                // 入力値無し
-                'peer-placeholder-shown:left-13',
-                // 入力値あり
-                'left-13',
-                // フォーカス
-                'peer-focus:text-xs',
-            ];
-            $inputIconClasses = [
-                'pl-13'
-            ];
-
+            $supportingTextStyles[] = 'text-on-surface-variant';
         }
     }
 
     $iconName = 'heroicon-o-' . $icon;
 
-    if ($multiline) {
-        $inputMultilineClasses = ['resize-none'];
-    } else {
-        $inputMultilineClasses = [];
-    }
-    $rootClass = implode(' ', $rootBaseClasses);
-    $inputClass = implode(' ', array_merge($inputBaseClasses, $inputIconClasses, $inputMultilineClasses));
-    $labelClass = implode(' ', array_merge($labelBaseClasses, $labelIconClasses));
-    $supportingIconClass = implode(' ', array_merge($supportingTextBaseClasses));
-  // {{-- blade-formatter-enable --}}
 @endphp
 
-<div {{ $attributes->class($rootClass)->only('class') }} x-data="{
+<div {{ $attributes->class(['relative'])->only('class') }} x-data="{
     autoresize(event) {
         const textarea = event.target;
         textarea.style.height = 'auto';
@@ -112,20 +122,20 @@
     <div
         class='hover:after:full-width relative hover:after:pointer-events-none hover:after:absolute hover:after:inset-0 hover:after:bg-on-surface hover:after:opacity-8'>
         @if ($multiline)
-            <textarea {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} class ="{{ $inputClass }}"
+            <textarea {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} @class($inputStyles)
                 x-on:input="autoresize" rows="1"></textarea>
         @else
-            <input {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} class="{{ $inputClass }}">
+            <input {{ $attributes->merge(['placeholder' => 'dummy'])->except('class') }} @class($inputStyles)>
         @endif
 
         @if ($label)
-            <label class="{{ $labelClass }}" for="{{ $attributes->get('id') }}">{{ $label }}</label>
+            <label @class($labelStyles) for="{{ $attributes->get('id') }}">{{ $label }}</label>
         @endif
         @if ($icon)
             <x-icon :name="$iconName" class="pointer-events-none absolute left-3 top-4 h-6 w-6" />
         @endif
     </div>
-    <p class="{{ $supportingIconClass }}">
+    <p @class($supportingTextStyles)>
         @if ($supportingText)
             {{ $supportingText }}
         @endif

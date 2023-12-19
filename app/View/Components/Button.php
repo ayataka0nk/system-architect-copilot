@@ -14,7 +14,8 @@ class Button extends Component
     public function __construct(
         public string $variant = 'filled',
         public string $color = 'primary',
-        public ?string $icon = null
+        public ?string $icon = null,
+        public ?string $href = null
     ) {
         //
     }
