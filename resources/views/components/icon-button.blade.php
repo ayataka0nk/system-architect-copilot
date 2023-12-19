@@ -19,6 +19,7 @@
         'w-10',
         'h-10',
         'rounded-full',
+        'text-on-surface-variant',
         'group-hover:after:absolute',
         'group-hover:after:full-width',
         'group-hover:after:full-height',
@@ -62,22 +63,20 @@
     // {{-- blade-formatter-enable --}}
     if ($variant === 'standard') {
         $iconMode = $active ? 's' : 'o';
-        $wrapperVariantClasses = match ($color) {
-            'primary' => ['text-primary'],
-            'secondary' => ['text-secondary'],
-            'tertiary' => ['text-tertiary'],
+        $wrapperActiveClasses = match ($color) {
+            'primary' => ['text-primary' => $active],
+            'secondary' => ['text-secondary' => $active],
+            'tertiary' => ['text-tertiary' => $active],
         };
     } else {
         throw new Exception('Invalid variant');
     }
     $iconName = 'heroicon-' . $iconMode . '-' . $icon;
-    $buttonClass = implode(' ', $buttonBaseClasses);
-    $wrapperClass = implode(' ', array_merge($wrapperBaseClasses, $wrapperVariantClasses));
 
 @endphp
 
-<button {{ $attributes->class($buttonClass) }}>
-    <div class="{{ $wrapperClass }}">
+<button {{ $attributes->class($buttonBaseClasses) }}>
+    <div @class(array_merge($wrapperBaseClasses, $wrapperActiveClasses))>
         <x-icon :name="$iconName" class="h-6 w-6" />
     </div>
 </button>
