@@ -5,7 +5,6 @@
         'inline-flex',
         'items-center',
         'align-bottom',
-        'justify-center',
         'gap-2',
         'overflow-hidden',
         'hover:after:absolute',
@@ -158,15 +157,15 @@
 @if ($href)
     <a href="{{ $href }}" {{ $attributes->class([$class]) }}>
         @if ($icon !== null)
-            <x-icon :name="$iconName" class="h-5 w-5" />
+            <x-icon :name="$iconName" class="h-5 w-5 shrink-0" />
         @endif
-        <p>{{ $slot }}</p>
+        <p @class(['truncate' => $truncate])>{{ $slot }}</p>
     </a>
 @else
     <button {{ $attributes->class([$class]) }}>
         @if ($icon !== null)
-            <x-icon :name="$iconName" class="h-5 w-5" />
+            <x-icon :name="$iconName" class="h-5 w-5 shrink-0" />
         @endif
-        <p>{{ $slot }}</p>
+        <p @class(['truncate' => $truncate])>{{ $slot }}</p>
     </button>
 @endif

@@ -15,7 +15,8 @@ class Button extends Component
         public string $variant = 'filled',
         public string $color = 'primary',
         public ?string $icon = null,
-        public ?string $href = null
+        public ?string $href = null,
+        public ?string $truncate = null
     ) {
         //
     }

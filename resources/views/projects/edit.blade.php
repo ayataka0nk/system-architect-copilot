@@ -1,5 +1,5 @@
 <x-layouts.user title="プロジェクト編集">
-    <x-toolbar prevName="詳細" :prevLink="route('projects.show', $project->id)" :title="$project->name">
+    <x-toolbar :prevName="$project->name" :prevLink="route('projects.show', $project->id)" title="編集">
     </x-toolbar>
     <section class='p-4'>
 
