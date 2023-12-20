@@ -1,23 +1,13 @@
-@php
-    $items = [
-        [
-            'name' => 'プロジェクト一覧',
-        ],
-    ];
-@endphp
-
 <x-layouts.user title='プロジェクト一覧'>
-    <x-breadcrumb :items="$items" />
+    <x-toolbar prevName="ホーム" :prevLink="route('dashboard')" title='プロジェクト一覧'>
+        <x-icon-button icon='pencil-square' :href="route('projects.create')" />
+    </x-toolbar>
     <section class='p-4'>
-        <x-button href="{{ route('projects.create') }}" icon='plus' class=mb-4>
-            プロジェクトを作成する</x-button>
         <div class='grid gap-2'>
             @foreach ($projects as $project)
-                <x-card href="{{ route('projects.show', $project) }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $project->name }}</h5>
-                        <p class="card-text">{{ $project->description }}</p>
-                    </div>
+                <x-card :href="route('projects.show', $project)" class="min-h-32">
+                    <h5 class="">{{ $project->name }}</h5>
+                    <p class="line-clamp-3 whitespace-pre-wrap">{{ $project->description }}</p>
                 </x-card>
             @endforeach
         </div>

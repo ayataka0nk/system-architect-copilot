@@ -76,8 +76,16 @@
 
 @endphp
 
-<button {{ $attributes->class($buttonBaseClasses) }}>
-    <div @class(array_merge($wrapperBaseClasses, $wrapperActiveClasses))>
-        <x-icon :name="$iconName" class="h-6 w-6" />
-    </div>
-</button>
+@if ($href)
+    <a {{ $attributes->class($buttonBaseClasses) }} href="{{ $href }}">
+        <div @class(array_merge($wrapperBaseClasses, $wrapperActiveClasses))>
+            <x-icon :name="$iconName" class="h-6 w-6" />
+        </div>
+    </a>
+@else
+    <button {{ $attributes->class($buttonBaseClasses) }}>
+        <div @class(array_merge($wrapperBaseClasses, $wrapperActiveClasses))>
+            <x-icon :name="$iconName" class="h-6 w-6" />
+        </div>
+    </button>
+@endif

@@ -158,14 +158,14 @@
 @if ($href)
     <a href="{{ $href }}" {{ $attributes->class([$class]) }}>
         @if ($icon !== null)
-            <x-icon :name="$iconName" class="h-6 w-6" />
+            <x-icon :name="$iconName" class="h-5 w-5" />
         @endif
         <p>{{ $slot }}</p>
     </a>
 @else
     <button {{ $attributes->class([$class]) }}>
         @if ($icon !== null)
-            <x-icon :name="$iconName" class="h-6 w-6" />
+            <x-icon :name="$iconName" class="h-5 w-5" />
         @endif
         <p>{{ $slot }}</p>
     </button>

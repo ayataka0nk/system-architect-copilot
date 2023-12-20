@@ -1,17 +1,6 @@
 <x-layouts.user title="プロジェクト編集">
-    <x-breadcrumb :items="[
-        [
-            'name' => 'プロジェクト一覧',
-            'path' => route('projects.index'),
-        ],
-        [
-            'name' => $project->name,
-            'path' => route('projects.show', $project),
-        ],
-        [
-            'name' => '編集',
-        ],
-    ]" />
+    <x-toolbar prevName="詳細" :prevLink="route('projects.show', $project->id)" :title="$project->name">
+    </x-toolbar>
     <section class='p-4'>
 
         <form action="{{ route('projects.update', $project) }}" method="post">

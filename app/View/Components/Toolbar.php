@@ -6,17 +6,15 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class IconButton extends Component
+class Toolbar extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public string $icon,
-        public string $variant = 'standard',
-        public bool $active = false,
-        public string $color = 'primary',
-        public ?string $href = null
+        public string $prevName,
+        public string $prevLink,
+        public string $title
     ) {
         //
     }
@@ -26,6 +24,6 @@ class IconButton extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.icon-button');
+        return view('components.toolbar');
     }
 }
