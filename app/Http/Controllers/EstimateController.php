@@ -52,7 +52,7 @@ class EstimateController extends Controller
      */
     public function show(string $id)
     {
-        $estimate = Estimate::with(['project'])->findOrFail($id);
+        $estimate = Estimate::with(['project', 'featureGroups'])->findOrFail($id);
         return view('estimates.show', [
             'project' => $estimate->project,
             'estimate' => $estimate,
@@ -75,7 +75,10 @@ class EstimateController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $estimate = Estimate::with(['project'])->findOrFail($id);
+        $estimate = Estimate::with([
+            'project',
+            'featureGroups.featureCategories.features'
+        ])->findOrFail($id);
         $estimate->update([
             'name' => $request->name,
             'description' => $request->description,

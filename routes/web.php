@@ -22,6 +22,11 @@ Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
 
 Route::resource('projects', \App\Http\Controllers\ProjectController::class);
 Route::resource('projects.estimates', \App\Http\Controllers\EstimateController::class)->shallow();
+Route::resource('estimates.feature-groups', \App\Http\Controllers\FeatureGroupController::class)->except([
+    'index', 'show'
+])->shallow();
+
+Route::resource('feature-groups.feature-categories', \App\Http\Controllers\FeatureCategoryController::class)->except(['index', 'show'])->shallow();
 
 Route::middleware('auth')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 

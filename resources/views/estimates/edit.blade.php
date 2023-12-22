@@ -2,8 +2,7 @@
     <x-toolbar :prevName="$estimate->name" :prevLink="route('estimates.show', $estimate->id)" title="編集">
     </x-toolbar>
     <section class='p-4'>
-
-        <form action="{{ route('estimates.update', $estimate) }}" method="post">
+        <form action="{{ route('estimates.update', $estimate->id) }}" method="post">
             @csrf
             @method('PUT')
             <x-text-field label="name" name='name' :value="$estimate->name" :error="$errors->first('name')" />

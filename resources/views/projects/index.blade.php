@@ -1,6 +1,6 @@
 <x-layouts.user title='プロジェクト一覧'>
     <x-toolbar prevName="ホーム" :prevLink="route('dashboard')" title='プロジェクト一覧'>
-        <x-icon-button icon='pencil-square' :href="route('projects.create')" />
+        <x-icon-button icon='plus' :href="route('projects.create')" />
     </x-toolbar>
     <section class='p-4'>
         <div class='grid gap-2'>
