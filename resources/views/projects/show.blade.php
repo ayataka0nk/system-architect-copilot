@@ -6,7 +6,8 @@
     <section class='p-4'>
         <div>
             <p>{{ $project->name }}</p>
-            <p>{{ $project->description }}</p>
+            <p class='whitespace-pre-wrap'>{{ $project->description }}</p>
         </div>
+        <x-button :href="route('projects.estimates.index', $project->id)">見積</x-button>
     </section>
 </x-layouts.user>

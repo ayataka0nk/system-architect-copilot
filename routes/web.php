@@ -21,7 +21,7 @@ Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->n
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'login']);
 
 Route::resource('projects', \App\Http\Controllers\ProjectController::class);
-
+Route::resource('projects.estimates', \App\Http\Controllers\EstimateController::class)->shallow();
 
 Route::middleware('auth')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
