@@ -17,7 +17,8 @@ class FeatureGroupFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->sentence,
+            'memo' => $this->faker->text,
         ];
     }
 }

@@ -1,6 +1,5 @@
 <x-layouts.user title='見積詳細'>
     <x-toolbar prevName="見積一覧" :prevLink="route('projects.estimates.index', $estimate->project->id)" :title="$estimate->name">
-        <x-icon-button icon='pencil-square' :href="route('estimates.edit', $estimate->id)" />
     </x-toolbar>
     <x-breadcrumbs :items="[
         [
@@ -12,9 +11,11 @@
         ['name' => $estimate->name],
     ]" />
     <section class='p-4'>
-        <div>
+        <header class='flex items-center justify-between'>
             <h2 class='text-2xl font-bold'>{{ $estimate->name }}</h2>
-            <p class='whitespace-pre-wrap'>{{ $estimate->description }}</p>
+            <x-icon-button icon='pencil-square' :href="route('estimates.edit', $estimate->id)" />
+        </header>
+        <p class='whitespace-pre-wrap'>{{ $estimate->description }}</p>
         </div>
         <hr class='mt-4' />
 

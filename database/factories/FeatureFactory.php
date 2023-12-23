@@ -17,7 +17,9 @@ class FeatureFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->sentence,
+            'description' => $this->faker->text,
+            'estimated_hours' => $this->faker->randomNumber(2, false),
         ];
     }
 }

@@ -3,6 +3,12 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Estimate;
+use App\Models\Feature;
+use App\Models\FeatureCategory;
+use App\Models\FeatureGroup;
+use App\Models\Project;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,14 +25,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'User',
             'email' => 'user@example.com'
         ]);
-
-        \App\Models\Project::factory()->create([
-            'name' => 'Project 1',
-            'description' => 'Description 1',
-        ]);
-        \App\Models\Project::factory()->create([
-            'name' => 'Project 2',
-            'description' => 'Description 2',
-        ]);
+        Project::factory()->state([
+            'name' => 'サンプルプロジェクト',
+            'description' => 'サンプルプロジェクトの説明'
+        ])->has(Estimate::factory()->count(20)
+            ->has(FeatureGroup::factory()->count(2)
+                ->has(FeatureCategory::factory()->count(10)
+                    ->has(Feature::factory()->count(5)))))->create();
+        Project::factory()->count(20)->create();
     }
 }

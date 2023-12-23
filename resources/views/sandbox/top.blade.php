@@ -73,6 +73,10 @@
             <x-icon-button variant='standard' icon='camera' color='secondary' :active="true" />
             <x-icon-button variant='standard' icon='camera' color='tertiary' :active="true" id='standard-camera' />
         </div>
+        <div>
+            <x-icon-button variant='filled' icon='camera' />
+            <x-icon-button variant='filled' icon='camera' :active="true" />
+        </div>
 
         <div class='grid gap-4'>
             <x-text-field id='foo' label='foo label' supportingText='Supporting Text' />

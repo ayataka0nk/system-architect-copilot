@@ -14,9 +14,10 @@ class EstimateController extends Controller
     public function index(string $projectId)
     {
         $project = Project::with(['estimates'])->findOrFail($projectId);
+        $estimates = Estimate::where('project_id', $projectId)->paginate(6);
         return view('estimates.index', [
             'project' => $project,
-            'estimates' => $project->estimates,
+            'estimates' => $estimates,
         ]);
     }
 
