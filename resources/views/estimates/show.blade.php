@@ -16,7 +16,6 @@
             <x-icon-button icon='pencil-square' :href="route('estimates.edit', $estimate->id)" />
         </header>
         <p class='whitespace-pre-wrap'>{{ $estimate->description }}</p>
-        </div>
         <hr class='mt-4' />
 
         <div class='grid gap-2'>

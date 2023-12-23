@@ -9,7 +9,12 @@ class FeatureCategory extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'memo', 'feature_group_id'];
+    protected $fillable = [
+        'name',
+        'memo',
+        'feature_group_id',
+        'sequence'
+    ];
 
     public function featureGroup()
     {

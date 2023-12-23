@@ -9,7 +9,12 @@ class FeatureGroup extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'memo', 'estimate_id'];
+    protected $fillable = [
+        'name',
+        'memo',
+        'estimate_id',
+        'sequence'
+    ];
 
     public function estimate()
     {

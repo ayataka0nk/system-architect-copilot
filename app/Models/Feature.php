@@ -9,7 +9,13 @@ class Feature extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'estimated_hours', 'feature_category_id'];
+    protected $fillable = [
+        'name',
+        'description',
+        'estimated_hours',
+        'feature_category_id',
+        'sequence'
+    ];
 
     public function featureCategory()
     {

@@ -9,6 +9,7 @@ use App\Models\Feature;
 use App\Models\FeatureCategory;
 use App\Models\FeatureGroup;
 use App\Models\Project;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,10 +29,15 @@ class DatabaseSeeder extends Seeder
         Project::factory()->state([
             'name' => 'サンプルプロジェクト',
             'description' => 'サンプルプロジェクトの説明'
-        ])->has(Estimate::factory()->count(20)
-            ->has(FeatureGroup::factory()->count(2)
-                ->has(FeatureCategory::factory()->count(10)
-                    ->has(Feature::factory()->count(5)))))->create();
+        ])->has(Estimate::factory()
+            ->count(20)
+            ->has(FeatureGroup::factory()
+                ->count(2)
+                ->has(FeatureCategory::factory()
+                    ->count(10)
+                    ->has(Feature::factory()
+                        ->count(5)))))
+            ->create();
         Project::factory()->count(20)->create();
     }
 }
