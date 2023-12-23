@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
-        Schema::create('feature-groups', function (Blueprint $table) {
+        Schema::create('feature_groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('estimate_id')->constrained();
             $table->string('name');
@@ -55,7 +55,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('projects');
         Schema::dropIfExists('estimates');
-        Schema::dropIfExists('feature-groups');
+        Schema::dropIfExists('feature_groups');
         Schema::dropIfExists('feature_categories');
         Schema::dropIfExists('features');
     }

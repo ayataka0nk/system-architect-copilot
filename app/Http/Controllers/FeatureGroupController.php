@@ -15,7 +15,7 @@ class FeatureGroupController extends Controller
     public function create($estimateId)
     {
         $estimate = Estimate::findOrFail($estimateId);
-        return view('feature_groups.create', [
+        return view('feature-groups.create', [
             'estimate' => $estimate
         ]);
     }
@@ -29,14 +29,9 @@ class FeatureGroupController extends Controller
             'name' => 'required',
             'memo' => 'nullable',
         ]);
-        $estimate = Estimate::with(['project', 'featureGroups'])->findOrFail($estimateId);
+        $estimate = Estimate::findOrFail($estimateId);
         $estimate->featureGroups()->create($values);
-        $estimate->refresh();
-
-        return view('estimates.show', [
-            'project' => $estimate->project,
-            'estimate' => $estimate,
-        ]);
+        return redirect()->route('estimates.show', $estimate->id);
     }
 
     /**
@@ -44,7 +39,7 @@ class FeatureGroupController extends Controller
      */
     public function edit(FeatureGroup $featureGroup)
     {
-        return view('feature_groups.edit', [
+        return view('feature-groups.edit', [
             'estimate' => $featureGroup->estimate,
             'featureGroup' => $featureGroup
         ]);
@@ -60,12 +55,7 @@ class FeatureGroupController extends Controller
             'memo' => 'nullable',
         ]);
         $featureGroup->update($values);
-        $featureGroup->refresh();
-
-        return view('estimates.show', [
-            'project' => $featureGroup->estimate->project,
-            'estimate' => $featureGroup->estimate,
-        ]);
+        return redirect()->route('estimates.show', $featureGroup->estimate->id);
     }
 
     /**

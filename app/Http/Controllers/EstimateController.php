@@ -41,10 +41,7 @@ class EstimateController extends Controller
         ]);
         $project = Project::findOrFail($projectId);
         $estimate = $project->estimates()->create($values);
-        return view('estimates.show', [
-            'project' => $project,
-            'estimate' => $estimate,
-        ]);
+        return redirect()->route('estimates.show', $estimate->id);
     }
 
     /**
@@ -83,10 +80,7 @@ class EstimateController extends Controller
             'name' => $request->name,
             'description' => $request->description,
         ]);
-        return view('estimates.show', [
-            'project' => $estimate->project,
-            'estimate' => $estimate,
-        ]);
+        return redirect()->route('estimates.show', $estimate->id);
     }
 
     /**

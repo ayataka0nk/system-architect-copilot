@@ -29,15 +29,10 @@ class FeatureCategoryController extends Controller
             'memo' => 'nullable|max:1000',
         ]);
 
-        $featureGroup = FeatureGroup::with([
-            'estimate', 'estimate.project'
-        ])->findOrFail($featureGroupId);
+        $featureGroup = FeatureGroup::with(['estimate'])->findOrFail($featureGroupId);
         $featureGroup->featureCategories()->create($value);
 
-        return redirect()->route('estimates.show', [
-            'project' => $featureGroup->estimate->project,
-            'estimate' => $featureGroup->estimate,
-        ]);
+        return redirect()->route('estimates.show',  $featureGroup->estimate->id);
     }
 
     /**
@@ -63,17 +58,7 @@ class FeatureCategoryController extends Controller
         ]);
 
         $featureCategory->update($value);
-        $featureCategory->load([
-            'featureGroup',
-            'featureGroup.estimate',
-            'featureGroup.estimate.project'
-        ]);
-
-
-        return redirect()->route('estimates.show', [
-            'project' => $featureCategory->featureGroup->estimate->project,
-            'estimate' => $featureCategory->featureGroup->estimate,
-        ]);
+        return redirect()->route('estimates.show', $featureCategory->featureGroup->estimate->id);
     }
 
     /**
