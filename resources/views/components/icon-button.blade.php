@@ -1,6 +1,6 @@
 @php
-    // {{-- blade-formatter-disable --}}
     $buttonBaseClasses = [
+        // dummy
         'relative',
         'inline-flex',
         'align-bottom',
@@ -61,7 +61,6 @@
         'group-active:before:opacity-30',
         'group-active:before:duration-0',
     ];
-    // {{-- blade-formatter-enable --}}
     if ($variant === 'standard') {
         $iconMode = $active ? 's' : 'o';
         $wrapperActiveClasses = match ($color) {

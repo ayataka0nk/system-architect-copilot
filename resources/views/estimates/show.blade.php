@@ -1,7 +1,16 @@
 <x-layouts.user title='見積詳細'>
-    <x-toolbar prevName="見積一覧" :prevLink="route('projects.estimates.index', $project->id)" :title="$estimate->name">
+    <x-toolbar prevName="見積一覧" :prevLink="route('projects.estimates.index', $estimate->project->id)" :title="$estimate->name">
         <x-icon-button icon='pencil-square' :href="route('estimates.edit', $estimate->id)" />
     </x-toolbar>
+    <x-breadcrumbs :items="[
+        [
+            'name' => 'プロジェクト一覧',
+            'url' => route('projects.index'),
+        ],
+        ['name' => $estimate->project->name, 'url' => route('projects.show', $estimate->project->id)],
+        ['name' => '見積一覧', 'url' => route('projects.estimates.index', $estimate->project->id)],
+        ['name' => $estimate->name],
+    ]" />
     <section class='p-4'>
         <div>
             <h2 class='text-2xl font-bold'>{{ $estimate->name }}</h2>

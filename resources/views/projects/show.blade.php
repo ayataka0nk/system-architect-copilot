@@ -2,7 +2,7 @@
     <x-toolbar prevName="一覧" :prevLink="route('projects.index')" :title="$project->name">
         <x-icon-button icon='pencil-square' :href="route('projects.edit', $project->id)" />
     </x-toolbar>
-
+    <x-breadcrumbs :items="[['name' => 'プロジェクト一覧', 'url' => route('projects.index')], ['name' => $project->name]]" />
     <section class='p-4'>
         <div>
             <p>{{ $project->name }}</p>

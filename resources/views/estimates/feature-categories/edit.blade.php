@@ -1,6 +1,27 @@
 <x-layouts.user title='機能カテゴリ編集'>
     <x-toolbar :prevName="$estimate->name" :prevLink="route('estimates.show', $estimate->id)" title='機能カテゴリ編集'>
     </x-toolbar>
+    <x-breadcrumbs :items="[
+        [
+            'name' => 'プロジェクト一覧',
+            'url' => route('projects.index'),
+        ],
+        [
+            'name' => $estimate->project->name,
+            'url' => route('projects.show', $estimate->project->id),
+        ],
+        [
+            'name' => '見積一覧',
+            'url' => route('projects.estimates.index', $estimate->project->id),
+        ],
+        [
+            'name' => $estimate->name,
+            'url' => route('estimates.show', $estimate->id),
+        ],
+        [
+            'name' => '機能カテゴリ作成',
+        ],
+    ]" />
     <section class='p-4'>
         <form action="{{ route('feature-categories.update', $featureCategory->id) }}" method="post">
             @csrf

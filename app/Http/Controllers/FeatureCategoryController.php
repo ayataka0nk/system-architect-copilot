@@ -15,6 +15,7 @@ class FeatureCategoryController extends Controller
     {
         $featureGroup = FeatureGroup::with(['estimate'])->findOrFail($featureGroupId);
         return view('estimates.feature-categories.create', [
+            'estimate' => $featureGroup->estimate,
             'featureGroup' => $featureGroup,
         ]);
     }

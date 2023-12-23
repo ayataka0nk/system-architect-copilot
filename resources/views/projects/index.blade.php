@@ -2,6 +2,7 @@
     <x-toolbar prevName="ホーム" :prevLink="route('dashboard')" title='プロジェクト一覧'>
         <x-icon-button icon='plus' :href="route('projects.create')" />
     </x-toolbar>
+    <x-breadcrumbs :items="[['name' => 'プロジェクト一覧']]" />
     <section class='p-4'>
         <div class='grid gap-2'>
             @foreach ($projects as $project)

@@ -25,8 +25,9 @@ class EstimateController extends Controller
      */
     public function create(string $projectId)
     {
+        $project = Project::findOrFail($projectId);
         return view('estimates.create', [
-            'projectId' => $projectId
+            'project' => $project
         ]);
     }
 
@@ -51,7 +52,6 @@ class EstimateController extends Controller
     {
         $estimate = Estimate::with(['project', 'featureGroups'])->findOrFail($id);
         return view('estimates.show', [
-            'project' => $estimate->project,
             'estimate' => $estimate,
         ]);
     }

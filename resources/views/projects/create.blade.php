@@ -1,6 +1,16 @@
 <x-layouts.user title='プロジェクト作成'>
     <x-toolbar prevName="一覧" :prevLink="route('projects.index')" title='プロジェクト作成'>
     </x-toolbar>
+    <x-breadcrumbs :items="[
+        [
+            'name' => 'プロジェクト一覧',
+            'url' => route('projects.index'),
+        ],
+        [
+            'name' => 'プロジェクト作成',
+        ],
+    ]" />
+
     <section class='p-4'>
         <form action="{{ route('projects.store') }}" method="post">
             @csrf
