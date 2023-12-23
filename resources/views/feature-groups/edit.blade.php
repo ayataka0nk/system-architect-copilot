@@ -10,4 +10,11 @@
             <x-button type='submit'>保存する</x-button>
         </form>
     </section>
+    <hr />
+    <form class='p-4' action="{{ route('feature-groups.destroy', $featureGroup->id) }}" method='post'
+        onsubmit="return confirm('本当に削除しますか？');">
+        @csrf
+        @method('DELETE')
+        <x-button icon='trash' color='secondary' variant='filled'>削除</x-button>
+    </form>
 </x-layouts.user>

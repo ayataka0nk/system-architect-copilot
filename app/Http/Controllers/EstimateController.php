@@ -86,8 +86,9 @@ class EstimateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Estimate $estimate)
     {
-        //
+        $estimate->delete();
+        return redirect()->route('projects.estimates.index', $estimate->project->id);
     }
 }

@@ -11,5 +11,5 @@
             <x-estimates.feature-category-section :featureCategory="$featureCategory" />
         @endforeach
     </div>
-    <x-icon-button icon='plus' :href="route('feature-groups.feature-categories.create', $featureGroup->id)" />
+    <x-button class='mt-2' icon='plus' variant='text' :href="route('feature-groups.feature-categories.create', $featureGroup->id)">カテゴリ追加</x-button>
 </section>

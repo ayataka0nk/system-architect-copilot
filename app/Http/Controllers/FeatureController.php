@@ -71,6 +71,8 @@ class FeatureController extends Controller
      */
     public function destroy(Feature $feature)
     {
-        //
+        $feature->delete();
+
+        return redirect()->route('estimates.show', $feature->featureCategory->featureGroup->estimate->id);
     }
 }

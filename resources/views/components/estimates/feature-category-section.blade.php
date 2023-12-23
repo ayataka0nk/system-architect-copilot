@@ -7,7 +7,7 @@
         @if ($featureCategory->memo)
             <p>memo: {{ $featureCategory->memo }}</p>
         @endif
-        <div class=''>
+        <div>
             @foreach ($featureCategory->features as $feature)
                 <section class='grid grid-cols-[1fr_4fr_70px_50px] gap-2'>
                     <h5 class='pt-3 font-bold'>{{ $feature->name }}</h5>
@@ -17,6 +17,6 @@
                 </section>
             @endforeach
         </div>
-        <x-icon-button icon='plus' :href="route('feature-categories.features.create', $featureCategory->id)" />
+        <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', $featureCategory->id)">機能追加</x-button>
     </section>
 </x-card>

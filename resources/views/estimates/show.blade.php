@@ -2,18 +2,20 @@
     <x-toolbar prevName="見積一覧" :prevLink="route('projects.estimates.index', $project->id)" :title="$estimate->name">
         <x-icon-button icon='pencil-square' :href="route('estimates.edit', $estimate->id)" />
     </x-toolbar>
-
     <section class='p-4'>
         <div>
-            <p>{{ $estimate->name }}</p>
+            <h2 class='text-2xl font-bold'>{{ $estimate->name }}</h2>
             <p class='whitespace-pre-wrap'>{{ $estimate->description }}</p>
         </div>
+        <hr class='mt-4' />
+
         <div class='grid gap-2'>
             @foreach ($estimate->featureGroups as $featureGroup)
                 <x-estimates.feature-group-section :featureGroup="$featureGroup" />
+                <hr />
             @endforeach
         </div>
-        <x-button class='mt-4' :href="route('estimates.feature-groups.create', $estimate->id)">機能グループ作成</x-button>
+        <x-button class='mt-4' variant='text' icon='plus' :href="route('estimates.feature-groups.create', $estimate->id)">グループ追加</x-button>
     </section>
 
     @push('scripts')

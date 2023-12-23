@@ -63,6 +63,7 @@ class FeatureGroupController extends Controller
      */
     public function destroy(FeatureGroup $featureGroup)
     {
-        //
+        $featureGroup->delete();
+        return redirect()->route('estimates.show', $featureGroup->estimate->id);
     }
 }
