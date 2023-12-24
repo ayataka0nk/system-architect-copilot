@@ -51,7 +51,18 @@ class EstimateController extends Controller
      */
     public function show(string $id)
     {
-        $estimate = Estimate::with(['project', 'featureGroups'])->findOrFail($id);
+        $estimate = Estimate::with([
+            'project',
+            'featureGroups' => function ($query) {
+                $query->orderBy('sequence');
+            },
+            'featureGroups.featureCategories' => function ($query) {
+                $query->orderBy('sequence');
+            },
+            'featureGroups.featureCategories.features' => function ($query) {
+                $query->orderBy('sequence');
+            },
+        ])->findOrFail($id);
         return view('estimates.show', [
             'estimate' => $estimate,
         ]);

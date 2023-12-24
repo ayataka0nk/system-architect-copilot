@@ -70,4 +70,18 @@ class FeatureCategoryController extends Controller
         $featureCategory->delete();
         return redirect()->route('estimates.show', $featureCategory->featureGroup->estimate->id);
     }
+
+    public function changeSequence(Request $request)
+    {
+        $values = $request->validate([
+            'ordered_id' => 'required|array',
+            'ordered_id.*' => 'integer',
+        ]);
+        foreach ($values['ordered_id'] as $sequence => $id) {
+            $category = FeatureCategory::findOrFail($id);
+            $category->sequence = $sequence;
+            $category->save();
+        }
+        return response()->noContent();
+    }
 }

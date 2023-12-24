@@ -17,3 +17,20 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::middleware('auth')->group(function () {
+    Route::put('/features/change-sequence', [
+        App\Http\Controllers\FeatureController::class,
+        'changeSequence'
+    ]);
+
+    Route::put('/feature-categories/change-sequence', [
+        App\Http\Controllers\FeatureCategoryController::class,
+        'changeSequence'
+    ]);
+
+    Route::put('/feature-groups/change-sequence', [
+        App\Http\Controllers\FeatureGroupController::class,
+        'changeSequence'
+    ]);
+});

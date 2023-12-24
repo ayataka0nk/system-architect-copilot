@@ -75,4 +75,19 @@ class FeatureController extends Controller
 
         return redirect()->route('estimates.show', $feature->featureCategory->featureGroup->estimate->id);
     }
+
+    public function changeSequence(Request $request)
+    {
+        $values = $request->validate([
+            'ordered_id' => 'required|array',
+            'ordered_id.*' => 'integer',
+        ]);
+
+        foreach ($values['ordered_id'] as $sequence => $id) {
+            $feature = Feature::findOrFail($id);
+            $feature->sequence = $sequence;
+            $feature->save();
+        }
+        return response()->noContent();
+    }
 }
