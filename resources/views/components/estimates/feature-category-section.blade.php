@@ -12,13 +12,7 @@
         @endif
         <div id="features-{{ $featureCategory->id }}">
             @foreach ($featureCategory->features as $feature)
-                <section class='grid grid-cols-[50px_1fr_4fr_70px_50px] gap-2' data-id="{{ $feature->id }}">
-                    <x-icon-button icon='chevron-up-down' class='feature-handle pt-3' noRipple />
-                    <h5 class='pt-3 font-bold'>{{ $feature->name }}</h5>
-                    <p class='whitespace-pre-wrap pt-3'>{{ $feature->description }}</p>
-                    <p class='pt-3'>{{ $feature->estimated_hours }} h</p>
-                    <x-icon-button icon="pencil-square" :href="route('features.edit', $feature)" />
-                </section>
+                <x-estimates.feature-section :feature="$feature" data-id="{{ $feature->id }}" />
             @endforeach
         </div>
         <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', $featureCategory->id)">機能追加</x-button>

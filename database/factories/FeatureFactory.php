@@ -24,6 +24,7 @@ class FeatureFactory extends Factory
             'description' => $this->faker->text,
             'estimated_hours' => $this->faker->randomNumber(2, false),
             'sequence' => self::$sequence++,
+            'proposed_estimated_hours' => $this->faker->randomNumber(2, false),
         ];
     }
 

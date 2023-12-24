@@ -19,7 +19,7 @@
             'url' => route('estimates.show', $estimate->id),
         ],
         [
-            'name' => '機能作成',
+            'name' => '機能編集',
         ],
     ]" />
     <section class='p-4'>

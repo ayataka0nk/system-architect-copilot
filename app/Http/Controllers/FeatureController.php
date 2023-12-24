@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Feature;
 use App\Models\FeatureCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FeatureController extends Controller
 {
@@ -88,6 +89,26 @@ class FeatureController extends Controller
             $feature->sequence = $sequence;
             $feature->save();
         }
+        return response()->noContent();
+    }
+
+    public function approveProposedEstimatedHours(Request $request, Feature $feature)
+    {
+        Log::debug('call approveProposedEstimatedHours');
+        Log::debug($request->all());
+        $feature->estimated_hours = $feature->proposed_estimated_hours;
+        $feature->proposed_estimated_hours = null;
+        $feature->save();
+        return response()->noContent();
+    }
+
+    public function rejectProposedEstimatedHours(Request $request, Feature $feature)
+    {
+        Log::debug('call rejectProposedEstimatedHours');
+        Log::debug($request->all());
+
+        $feature->proposed_estimated_hours = null;
+        $feature->save();
         return response()->noContent();
     }
 }

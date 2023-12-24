@@ -33,4 +33,14 @@ Route::middleware('auth')->group(function () {
         App\Http\Controllers\FeatureGroupController::class,
         'changeSequence'
     ]);
+
+    Route::put('/features/{feature}/approve-proposed-estimated-hours', [
+        App\Http\Controllers\FeatureController::class,
+        'approveProposedEstimatedHours'
+    ])->name('features.approve-proposed-estimated-hours');
+
+    Route::put('/features/{feature}/reject-proposed-estimated-hours', [
+        App\Http\Controllers\FeatureController::class,
+        'rejectProposedEstimatedHours'
+    ])->name('features.reject-proposed-estimated-hours');
 });
