@@ -53,7 +53,7 @@
             'before:[transition:transform_.7s,opacity_1.2s]',
             'before:bg-ripple-surface-variant',
             'group-active:before:scale-0',
-            'group-active:before:opacity-30',
+            'group-active:before:opacity-30' => !$noRipple,
             'group-active:before:duration-0',
         ];
     }

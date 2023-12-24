@@ -18,16 +18,16 @@
         <p class='whitespace-pre-wrap'>{{ $estimate->description }}</p>
         <hr class='mt-4' />
 
-        <div class='grid gap-2'>
+        <div class='grid gap-2' id='feature-groups'>
             @foreach ($estimate->featureGroups as $featureGroup)
                 <x-estimates.feature-group-section :featureGroup="$featureGroup" />
-                <hr />
             @endforeach
         </div>
         <x-button class='mt-4' variant='text' icon='plus' :href="route('estimates.feature-groups.create', $estimate->id)">グループ追加</x-button>
     </section>
 
-    @push('scripts')
+    @pushonce('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
         <script>
             window.addEventListener('beforeunload', function() {
                 localStorage.setItem('estimates.show.scrollPosition', window.scrollY);
@@ -40,5 +40,6 @@
                 }
             });
         </script>
-    @endpush
+    @endpushonce
+
 </x-layouts.user>

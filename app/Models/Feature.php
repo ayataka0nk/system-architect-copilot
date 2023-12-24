@@ -13,6 +13,7 @@ class Feature extends Model
         'name',
         'description',
         'estimated_hours',
+        'proposed_estimated_hours',
         'feature_category_id',
         'sequence'
     ];

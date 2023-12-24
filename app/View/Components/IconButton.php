@@ -16,7 +16,8 @@ class IconButton extends Component
         public string $variant = 'standard',
         public bool $active = false,
         public string $color = 'primary',
-        public ?string $href = null
+        public ?string $href = null,
+        public bool $noRipple = false,
     ) {
         //
     }
