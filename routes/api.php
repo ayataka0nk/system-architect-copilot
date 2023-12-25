@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
         'changeSequence'
     ]);
 
+    Route::put('/feature-categories/{featureCategory}/propose-estimated-hours', [\App\Http\Controllers\FeatureController::class, 'proposeEstimatedHours'])
+        ->name('feature-categories.propose-estimated-hours');
+
     Route::put('/features/{feature}/approve-proposed-estimated-hours', [
         App\Http\Controllers\FeatureController::class,
         'approveProposedEstimatedHours'

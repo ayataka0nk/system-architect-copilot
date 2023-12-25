@@ -28,6 +28,7 @@
             @method('PUT')
             <x-text-field label="name" name='name' :value="$feature->name" :error="$errors->first('name')" />
             <x-text-field multiline label="description" name='description' :value="$feature->description" :error="$errors->first('description')" />
+            <x-text-field label="estimated_hours" name='estimated_hours' :value="$feature->estimated_hours" :error="$errors->first('estimated_hours')" />
             <x-button type='submit'>保存する</x-button>
         </form>
     </section>

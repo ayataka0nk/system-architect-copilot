@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Adapters\LanguageModelClient\LanguageModelClientFactory;
+use App\Adapters\LanguageModelClient\Message;
 use App\Models\Feature;
 use App\Models\FeatureCategory;
 use Illuminate\Http\Request;
@@ -58,8 +60,9 @@ class FeatureController extends Controller
     public function update(Request $request, Feature $feature)
     {
         $values = $request->validate([
-            'name' => 'required',
-            'description' => 'nullable',
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            'estimated_hours' => 'nullable|numeric',
         ]);
 
         $feature->update($values);
@@ -75,6 +78,23 @@ class FeatureController extends Controller
         $feature->delete();
 
         return redirect()->route('estimates.show', $feature->featureCategory->featureGroup->estimate->id);
+    }
+
+
+    public function proposeEstimatedHours(
+        Request $request,
+        FeatureCategory $featureCategory,
+        LanguageModelClientFactory $languageModelClientfactory
+    ) {
+        Log::debug('call proposeEstimatedHours');
+        Log::debug($request->all());
+
+        $client = $languageModelClientfactory->make(LanguageModelClientFactory::TURBO);
+        $completion = $client->createChatCompletion(messages: [new Message(role: 'user', content: 'こんにちは')]);
+        Log::debug($completion->content);
+        return response()->json([
+            'result' => $completion->content
+        ]);
     }
 
     public function changeSequence(Request $request)

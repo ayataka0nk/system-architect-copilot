@@ -29,8 +29,8 @@ Route::resource('feature-groups.feature-categories', \App\Http\Controllers\Featu
 Route::resource('feature-categories.features', \App\Http\Controllers\FeatureController::class)
     ->except(['index', 'show'])->shallow();
 
-Route::put('/features/{feature}/action-estimated-hours', [\App\Http\Controllers\FeatureController::class, 'actionEstimatedHours'])
-    ->name('features.action-estimated-hours');
+// Route::put('/feature-categories/{featureCategory}/propose-estimated-hours', [\App\Http\Controllers\FeatureController::class, 'proposeEstimatedHours'])
+//     ->name('feature-categories.propose-estimated-hours');
 
 Route::middleware('auth')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 

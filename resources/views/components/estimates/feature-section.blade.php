@@ -5,7 +5,7 @@
     <x-icon-button icon='chevron-up-down' class='feature-handle pt-3' noRipple />
     <h5 class='pt-3 font-bold'>{{ $feature->name }}</h5>
     <p class='whitespace-pre-wrap pt-3'>{{ $feature->description }}</p>
-    <p class='pt-3' x-text="estimatedHours + ' h'"></p>
+    <p class='pt-3' x-text="estimatedHours && estimatedHours + ' h'"></p>
     <div>
         <div class='flex flex-col items-center' x-show="proposedEstimatedHours">
             <p class='pt-3' x-text="proposedEstimatedHours + ' h'"></p>
