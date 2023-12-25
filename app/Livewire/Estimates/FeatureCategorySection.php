@@ -33,8 +33,13 @@ class FeatureCategorySection extends Component
                 'proposed_estimated_hours' => 1
             ]);
         }
-        $this->featureCategory->features = $this->featureCategory->features->sortBy('sequence');
+        $this->refresh();
         $this->dispatch('refresh-features.' . $this->featureCategory->id);
+    }
+
+    private function refresh()
+    {
+        $this->featureCategory->features = $this->featureCategory->features->sortBy('sequence');
     }
 
     public function render()

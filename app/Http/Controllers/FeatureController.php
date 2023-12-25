@@ -116,24 +116,4 @@ class FeatureController extends Controller
         }
         return response()->noContent();
     }
-
-    public function approveProposedEstimatedHours(Request $request, Feature $feature)
-    {
-        Log::debug('call approveProposedEstimatedHours');
-        Log::debug($request->all());
-        $feature->estimated_hours = $feature->proposed_estimated_hours;
-        $feature->proposed_estimated_hours = null;
-        $feature->save();
-        return response()->noContent();
-    }
-
-    public function rejectProposedEstimatedHours(Request $request, Feature $feature)
-    {
-        Log::debug('call rejectProposedEstimatedHours');
-        Log::debug($request->all());
-
-        $feature->proposed_estimated_hours = null;
-        $feature->save();
-        return response()->noContent();
-    }
 }

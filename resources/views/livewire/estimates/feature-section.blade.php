@@ -1,5 +1,5 @@
-<section>
-    <x-card @class([$class])>
+<section data-id={{ $dataId }}>
+    <x-card>
         <div class='flex items-center'>
             <x-icon-button icon='chevron-up-down' class='feature-handle' noRipple />
             <h5 class='font-bold'>{{ $feature->name }}</h5>
