@@ -10,7 +10,7 @@
         ['name' => '見積一覧'],
     ]" />
     <div class='px-4'>
-        <x-button icon='plus' :href="route('projects.show', $project->id)">見積作成</x-button>
+        <x-button icon='plus' :href="route('projects.estimates.create', $project->id)">見積作成</x-button>
     </div>
     <section class='p-4'>
         <div class='grid gap-2'>

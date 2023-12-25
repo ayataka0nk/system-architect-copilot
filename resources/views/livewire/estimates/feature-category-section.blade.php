@@ -10,13 +10,19 @@
         @if ($featureCategory->memo)
             <p>memo: {{ $featureCategory->memo }}</p>
         @endif
+        <div class='mt-2 flex justify-end'>
+            <x-button icon='sparkles' wire:click='proposeEstimatedHours'>一括見積</x-button>
+        </div>
         <div id="features-{{ $featureCategory->id }}">
             @foreach ($featureCategory->features as $feature)
                 <livewire:estimates.feature-section :feature="$feature" wire:key="feature-{{ $feature->id }}"
                     data-id="{{ $feature->id }}" />
             @endforeach
         </div>
-        <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', $featureCategory->id)">機能追加</x-button>
+        <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', [
+            $featureCategory->id,
+            'sequence' => $featureCategory->features->last()->sequence + 1,
+        ])">機能追加</x-button>
     </section>
 </x-card>
 

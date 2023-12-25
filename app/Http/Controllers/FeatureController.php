@@ -14,12 +14,15 @@ class FeatureController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(string $featureCategoryId)
+    public function create(Request $request, string $featureCategoryId)
     {
+        $sequence = $request->input('sequence');
+        Log::debug('create feature', ['sequence' => $sequence]);
         $featureCategory = FeatureCategory::with(['featureGroup.estimate'])->findOrFail($featureCategoryId);
         return view('estimates.features.create', [
             'estimate' => $featureCategory->featureGroup->estimate,
-            'featureCategory' => FeatureCategory::findOrFail($featureCategoryId)
+            'featureCategory' => FeatureCategory::findOrFail($featureCategoryId),
+            'sequence' => $sequence,
         ]);
     }
 
@@ -31,6 +34,8 @@ class FeatureController extends Controller
         $values = $request->validate([
             'name' => 'required',
             'description' => 'nullable',
+            'estimated_hours' => 'nullable|integer',
+            'sequence' => 'integer',
         ]);
 
         $feature = Feature::create($values + [
