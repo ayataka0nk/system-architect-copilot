@@ -1,4 +1,4 @@
-<x-card {{ $attributes }}>
+<x-card @class([$class]) data-id="{{ $dataId }}">
     <section>
         <header class='flex items-center justify-between'>
             <div class='flex items-center'>
@@ -12,7 +12,8 @@
         @endif
         <div id="features-{{ $featureCategory->id }}">
             @foreach ($featureCategory->features as $feature)
-                <livewire:estimates.feature-section :feature="$feature" :data-id="$feature->id" />
+                <livewire:estimates.feature-section :feature="$feature" wire:key="feature-{{ $feature->id }}"
+                    data-id="{{ $feature->id }}" />
             @endforeach
         </div>
         <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', $featureCategory->id)">機能追加</x-button>

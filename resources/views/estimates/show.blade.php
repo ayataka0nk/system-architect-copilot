@@ -21,7 +21,8 @@
 
         <div class='grid gap-2' id='feature-groups'>
             @foreach ($estimate->featureGroups as $featureGroup)
-                <x-estimates.feature-group-section :featureGroup="$featureGroup" data-id="{{ $featureGroup->id }}" />
+                <x-estimates.feature-group-section :featureGroup="$featureGroup" data-id="{{ $featureGroup->id }}"
+                    wire:key="feature-group-{{ $featureGroup->id }}" />
             @endforeach
         </div>
         <x-button class='mt-4' variant='text' icon='plus' :href="route('estimates.feature-groups.create', $estimate->id)">グループ追加</x-button>
@@ -43,7 +44,7 @@
             });
         </script>
     @endpushonce
-    @push('scripts')
+    {{-- @push('scripts')
         <script>
             window.addEventListener('load', function() {
                 const el = document.getElementById("feature-groups");
@@ -61,5 +62,5 @@
                 });
             });
         </script>
-    @endpush
+    @endpush --}}
 </x-layouts.user>

@@ -11,7 +11,9 @@
     @endif
     <div class='mt-4 grid gap-2' id="feature-categories-{{ $featureGroup->id }}">
         @foreach ($featureGroup->featureCategories as $featureCategory)
-            <x-estimates.feature-category-section :featureCategory="$featureCategory" data-id="{{ $featureCategory->id }}" />
+            {{-- <x-estimates.feature-category-section :featureCategory="$featureCategory" data-id="{{ $featureCategory->id }}" /> --}}
+            <livewire:estimates.feature-category-section :featureCategory="$featureCategory" :data-id="$featureCategory->id"
+                wire:key="feature-category-{{ $featureCategory->id }}" />
         @endforeach
     </div>
     <x-button class='mt-2' icon='plus' variant='text' :href="route('feature-groups.feature-categories.create', $featureGroup->id)">カテゴリ追加</x-button>

@@ -88,5 +88,9 @@
             <x-card>Card Sample</x-card>
             <x-card href="hoge">Card Link Sample</x-card>
         </div>
+
+        <div>
+            <livewire:counter />
+        </div>
     </div>
 </x-layouts.guest>

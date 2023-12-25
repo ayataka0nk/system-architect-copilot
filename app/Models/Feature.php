@@ -18,6 +18,19 @@ class Feature extends Model
         'sequence'
     ];
 
+    public function approveProposedEstimatedHours()
+    {
+        $this->estimated_hours = $this->proposed_estimated_hours;
+        $this->proposed_estimated_hours = null;
+        $this->save();
+    }
+
+    public function rejectProposedEstimatedHours()
+    {
+        $this->proposed_estimated_hours = null;
+        $this->save();
+    }
+
     public function featureCategory()
     {
         return $this->belongsTo(FeatureCategory::class);
