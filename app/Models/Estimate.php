@@ -20,4 +20,20 @@ class Estimate extends Model
     {
         return $this->hasMany(FeatureGroup::class);
     }
+
+    public static function findOrdered(string $id)
+    {
+        return Estimate::with([
+            'project',
+            'featureGroups' => function ($query) {
+                $query->orderBy('sequence');
+            },
+            'featureGroups.featureCategories' => function ($query) {
+                $query->orderBy('sequence');
+            },
+            'featureGroups.featureCategories.features' => function ($query) {
+                $query->orderBy('sequence');
+            },
+        ])->findOrFail($id);
+    }
 }

@@ -3,12 +3,12 @@
 namespace App\Livewire\Estimates;
 
 use App\Models\Feature;
-use Livewire\Attributes\Reactive;
+use Illuminate\Support\Facades\Log;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class FeatureSection extends Component
 {
-    #[Reactive]
     public Feature $feature;
 
     public string $class;
@@ -26,14 +26,19 @@ class FeatureSection extends Component
 
     public function approve()
     {
-        $featureCategoryId = $this->feature->feature_category_id;
-        $this->dispatch("approve-proposed-estimated-hours.$featureCategoryId",  $this->feature);
+        $this->feature->approveProposedEstimatedHours();
     }
 
     public function reject()
     {
-        $featureCategoryId = $this->feature->feature_category_id;
-        $this->dispatch("reject-proposed-estimated-hours.$featureCategoryId", $this->feature);
+        $this->feature->rejectProposedEstimatedHours();
+    }
+
+    #[On('refresh-features.{feature.feature_category_id}')]
+    public function refresh()
+    {
+        Log::debug('refresh-features');
+        $this->feature->refresh();
     }
 
     public function render()

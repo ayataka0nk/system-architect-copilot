@@ -60,6 +60,9 @@ export default {
         'underline-thin': '0 1px 0 0 black',
         'underline-thick': '0 2px 0 0 black',
       },
+      gridTemplateColumns: {
+        features: 'grid grid-cols-[50px_1fr_4fr_60px_60px_50px] gap-2',
+      },
     },
   },
   plugins: [],

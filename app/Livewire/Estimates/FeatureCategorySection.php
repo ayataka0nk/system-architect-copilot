@@ -2,16 +2,15 @@
 
 namespace App\Livewire\Estimates;
 
-use App\Models\Feature;
 use App\Models\FeatureCategory;
 use Illuminate\Support\Facades\Log;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 
 class FeatureCategorySection extends Component
 {
     public FeatureCategory $featureCategory;
+
     public string $class;
     public string $dataId;
 
@@ -25,38 +24,18 @@ class FeatureCategorySection extends Component
         $this->class = $class;
     }
 
+
     public function proposeEstimatedHours()
     {
+        Log::debug('dispatch propose-estimated-hours', ['featureCategoryId' => $this->featureCategory->id]);
         foreach ($this->featureCategory->features as $feature) {
             $feature->update([
                 'proposed_estimated_hours' => 1
             ]);
         }
-        $this->refreshFeatureCategory();
-    }
-
-    #[On('approve-proposed-estimated-hours.{featureCategory.id}')]
-    public function approveProposedEstimatedHours(Feature $feature)
-    {
-        Log::debug('approve-proposed-estimated-hours', ['featureId' => $feature->id]);
-        $feature->approveProposedEstimatedHours();
-        $this->refreshFeatureCategory();
-    }
-
-    #[On('reject-proposed-estimated-hours.{featureCategory.id}')]
-    public function rejectProposedEstimatedHours(Feature $feature)
-    {
-        $feature->rejectProposedEstimatedHours();
-        $this->refreshFeatureCategory();
-    }
-
-    private function refreshFeatureCategory()
-    {
-        $this->featureCategory->refresh();
-        $this->featureCategory->load('features');
         $this->featureCategory->features = $this->featureCategory->features->sortBy('sequence');
+        $this->dispatch('refresh-features.' . $this->featureCategory->id);
     }
-
 
     public function render()
     {

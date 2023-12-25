@@ -1,30 +1,32 @@
-<x-card @class([$class]) data-id="{{ $dataId }}">
+<div @class([$class, 'bg-surface-container rounded-lg p-2']) data-id="{{ $dataId }}">
     <section>
         <header class='flex items-center justify-between'>
             <div class='flex items-center'>
                 <x-icon-button icon='chevron-up-down' class='feature-category-handle' noRipple />
                 <h4 class='text-lg font-bold'>{{ $featureCategory->name }}</h4>
+                <x-icon-button icon="pencil-square" :href="route('feature-categories.edit', $featureCategory)" />
             </div>
-            <x-icon-button icon="pencil-square" :href="route('feature-categories.edit', $featureCategory)" />
         </header>
         @if ($featureCategory->memo)
             <p>memo: {{ $featureCategory->memo }}</p>
         @endif
-        <div class='mt-2 flex justify-end'>
-            <x-button icon='sparkles' wire:click='proposeEstimatedHours'>一括見積</x-button>
+        <div class='flex justify-end py-2'>
+            <x-button icon='sparkles' type='button' wire:click='proposeEstimatedHours'>一括見積</x-button>
         </div>
-        <div id="features-{{ $featureCategory->id }}">
+        <div id="features-{{ $featureCategory->id }}" class='grid gap-2'>
             @foreach ($featureCategory->features as $feature)
                 <livewire:estimates.feature-section :feature="$feature" wire:key="feature-{{ $feature->id }}"
                     data-id="{{ $feature->id }}" />
             @endforeach
         </div>
-        <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', [
-            $featureCategory->id,
-            'sequence' => $featureCategory->features->last()->sequence + 1,
-        ])">機能追加</x-button>
+        <div class='py-2'>
+            <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', [
+                $featureCategory->id,
+                'sequence' => $featureCategory->features->last()->sequence + 1,
+            ])">機能追加</x-button>
+        </div>
     </section>
-</x-card>
+</div>
 
 @push('scripts')
     <script>
