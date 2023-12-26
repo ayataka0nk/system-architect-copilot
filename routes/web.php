@@ -26,6 +26,7 @@ Route::resource('estimates.feature-groups', \App\Http\Controllers\FeatureGroupCo
     ->except(['index', 'show'])->shallow();
 Route::resource('feature-groups.feature-categories', \App\Http\Controllers\FeatureCategoryController::class)
     ->except(['index', 'show'])->shallow();
+
 Route::resource('feature-categories.features', \App\Http\Controllers\FeatureController::class)
     ->except(['index', 'show'])->shallow();
 

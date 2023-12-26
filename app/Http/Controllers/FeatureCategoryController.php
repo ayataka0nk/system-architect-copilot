@@ -87,6 +87,7 @@ class FeatureCategoryController extends Controller
 
     public function proposeEstimatedHours(FeatureCategory $featureCategory)
     {
+        sleep(5);
         foreach ($featureCategory->features as $feature) {
             $feature->update([
                 'proposed_estimated_hours' => 1

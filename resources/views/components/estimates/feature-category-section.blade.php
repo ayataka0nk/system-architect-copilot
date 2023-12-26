@@ -1,5 +1,7 @@
 <div {{ $attributes->class('bg-surface-container rounded-lg p-2') }}>
-    <section>
+    <section x-data="{
+        aiEstimationStatus: 'ready',
+    }">
         <header class='flex items-center justify-between'>
             <div class='flex items-center'>
                 <x-icon-button icon='chevron-up-down' class='feature-category-handle' noRipple />
@@ -10,11 +12,16 @@
         @if ($featureCategory->memo)
             <p>memo: {{ $featureCategory->memo }}</p>
         @endif
-        <div class='flex justify-end py-2'>
-            <x-button icon='sparkles' type='button'
+        <div class='flex items-center justify-end gap-2 py-2'>
+            <x-button x-show="aiEstimationStatus === 'ready'" icon='sparkles' type='button'
                 x-on:click="
-                axios.put('{{ route('feature-categories.propose-estimated-hours', $featureCategory) }}')
+                aiEstimationStatus = 'in-progress'
+                await axios.put('{{ route('feature-categories.propose-estimated-hours', $featureCategory) }}');
+                aiEstimationStatus = 'completed'
             ">一括見積</x-button>
+            <x-button icon='clock' x-show="aiEstimationStatus==='in-progress'">AI見積中…</x-button>
+            <x-button icon='arrow-path' x-show="aiEstimationStatus==='completed'"
+                x-on:click="location.reload()">ページを更新してAI見積を確認する</x-button>
         </div>
         <div id="features-{{ $featureCategory->id }}" class='grid gap-2'>
             @foreach ($featureCategory->features as $feature)
