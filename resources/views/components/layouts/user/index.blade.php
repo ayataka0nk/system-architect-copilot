@@ -10,7 +10,6 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
     @stack('scripts')
-    @livewireStyles
 </head>
 
 <body class="bg-surface">
@@ -24,7 +23,6 @@
         {{-- <x-layouts.user.navigation class='fixed left-0 top-0 overflow-y-auto' /> --}}
         {{ $slot }}
     </div>
-    @livewireScripts
 </body>
 
 </html>

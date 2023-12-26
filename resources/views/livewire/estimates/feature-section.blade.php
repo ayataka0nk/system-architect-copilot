@@ -22,8 +22,17 @@
                 <p class='font-bold italic text-primary'>
                     {{ $feature->proposed_estimated_hours }} h
                 </p>
-                <x-icon-button icon="check" type='button' wire:click='approve()' />
-                <x-icon-button icon="x-mark" type='button' wire:click='reject()' />
+                <x-icon-button icon="check"
+                x-on:click="
+                axios.put('{{ route('features.approve-proposed-estimated-hours', $feature->id) }}')
+                estimatedHours = proposedEstimatedHours
+                proposedEstimatedHours = null
+                " />
+            <x-icon-button icon="x-mark"
+                x-on:click="
+                axios.put('{{ route('features.reject-proposed-estimated-hours', $feature->id) }}')
+                proposedEstimatedHours = null
+                " />
             @endif
         </div>
     </x-card>

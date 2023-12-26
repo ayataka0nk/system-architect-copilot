@@ -84,4 +84,14 @@ class FeatureCategoryController extends Controller
         }
         return response()->noContent();
     }
+
+    public function proposeEstimatedHours(FeatureCategory $featureCategory)
+    {
+        foreach ($featureCategory->features as $feature) {
+            $feature->update([
+                'proposed_estimated_hours' => 1
+            ]);
+        }
+        return response()->noContent();
+    }
 }

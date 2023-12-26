@@ -116,4 +116,16 @@ class FeatureController extends Controller
         }
         return response()->noContent();
     }
+
+    public function approveProposedEstimatedHours(Feature $feature)
+    {
+        $feature->approveProposedEstimatedHours();
+        return response()->noContent();
+    }
+
+    public function rejectProposedEstimatedHours(Feature $feature)
+    {
+        $feature->rejectProposedEstimatedHours();
+        return response()->noContent();
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Estimates;
 
+use App\Models\Feature;
 use App\Models\FeatureCategory;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -36,6 +37,16 @@ class FeatureCategorySection extends Component
         $this->refresh();
         $this->dispatch('refresh-features.' . $this->featureCategory->id);
     }
+
+    // public function changeSequence($orders)
+    // {
+    //     Log::debug('changeSequence', ['orders' => $orders]);
+    //     foreach ($orders as $sequence => $id) {
+    //         $feature = Feature::findOrFail($id);
+    //         $feature->sequence = $sequence;
+    //         $feature->save();
+    //     }
+    // }
 
     private function refresh()
     {
