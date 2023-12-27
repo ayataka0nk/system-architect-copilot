@@ -35,6 +35,7 @@ class FeatureController extends Controller
             'name' => 'required',
             'description' => 'nullable',
             'estimated_hours' => 'nullable|integer',
+            'estimated_hours_reason' => 'nullable|string',
             'sequence' => 'integer',
         ]);
 
@@ -68,6 +69,7 @@ class FeatureController extends Controller
             'name' => 'required|string',
             'description' => 'nullable|string',
             'estimated_hours' => 'nullable|numeric',
+            'estimated_hours_reason' => 'nullable|string',
         ]);
 
         $feature->update($values);
