@@ -25,20 +25,23 @@ class OpenAIClient implements LanguageModelClient
                 'content' => $message->content,
             ];
         }, $messages);
-        $apiKey = config('open_ai_api_key');
 
         $res = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $apiKey
+            'Authorization' => 'Bearer ' . config('app.open_ai_api_key')
         ])->timeout(60)->post('https://api.openai.com/v1/chat/completions', [
-            'model' => 'gpt-3.5-turbo',
+            'model' => 'gpt-3.5-turbo-1106',
             'messages' => $messages,
+            'response_format' => ['type' => 'json_object'],
             'max_tokens' => 1000,
             'temperature' => 1,
             'top_p' => 1,
         ]);
 
         if ($res->failed()) {
-            throw new \Exception('Failed to create chat completion');
+            Log::error('Failed to create chat completion', [
+                'response' => $res->json(),
+            ]);
+            throw new \Exception('Failed to create chat completion: ');
         }
 
         $body = $res->json();

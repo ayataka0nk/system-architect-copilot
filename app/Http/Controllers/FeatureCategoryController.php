@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\FeatureCategory;
 use App\Models\FeatureGroup;
+use App\Services\Estimates\ProposeEstimatedHoursService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FeatureCategoryController extends Controller
 {
@@ -85,12 +87,22 @@ class FeatureCategoryController extends Controller
         return response()->noContent();
     }
 
-    public function proposeEstimatedHours(FeatureCategory $featureCategory)
-    {
-        sleep(5);
+    public function proposeEstimatedHours(
+        FeatureCategory $featureCategory,
+        ProposeEstimatedHoursService $service
+    ) {
+        $result = $service->handle(featureCategoryId: $featureCategory->id);
         foreach ($featureCategory->features as $feature) {
+            $featureEstimation = $result->where('id', $feature->id)->first();
+            if (!$featureEstimation) {
+                Log::warning('Feature estimation not found', [
+                    'feature_id' => $feature->id,
+                ]);
+                continue;
+            }
             $feature->update([
-                'proposed_estimated_hours' => 1
+                'proposed_estimated_hours' => $featureEstimation['proposed_estimated_hours'],
+                'proposed_estimated_hours_reason' => $featureEstimation['proposed_estimated_hours_reason'],
             ]);
         }
         return response()->noContent();

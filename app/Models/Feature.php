@@ -14,6 +14,7 @@ class Feature extends Model
         'description',
         'estimated_hours',
         'proposed_estimated_hours',
+        'proposed_estimated_hours_reason',
         'feature_category_id',
         'sequence'
     ];
@@ -21,13 +22,16 @@ class Feature extends Model
     public function approveProposedEstimatedHours()
     {
         $this->estimated_hours = $this->proposed_estimated_hours;
+        $this->estimated_hours_reason = $this->proposed_estimated_hours_reason;
         $this->proposed_estimated_hours = null;
+        $this->proposed_estimated_hours_reason = null;
         $this->save();
     }
 
     public function rejectProposedEstimatedHours()
     {
         $this->proposed_estimated_hours = null;
+        $this->proposed_estimated_hours_reason = null;
         $this->save();
     }
 
