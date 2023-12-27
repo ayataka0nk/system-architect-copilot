@@ -15,9 +15,12 @@
     <section class='p-4'>
         <div class='grid gap-2'>
             @foreach ($estimates as $estimate)
-                <x-card :href="route('estimates.show', $estimate)" class="h-32">
+                <x-card :href="route('estimates.show', $estimate)" class="flex h-40 flex-col">
                     <h5 class="">{{ $estimate->name }}</h5>
                     <p class="line-clamp-3 whitespace-pre-wrap">{{ $estimate->description }}</p>
+                    <div class='mt-auto text-right'>
+                        <p class='text-sm'>{{ $estimate->updated_at }}</p>
+                    </div>
                 </x-card>
             @endforeach
         </div>

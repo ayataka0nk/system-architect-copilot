@@ -8,9 +8,12 @@
     <section class='p-4'>
         <div class='grid gap-2'>
             @foreach ($projects as $project)
-                <x-card :href="route('projects.show', $project)" class="h-32">
-                    <h5 class="">{{ $project->name }}</h5>
+                <x-card :href="route('projects.show', $project)" class="flex h-40 flex-col">
+                    <h5 class="text-lg">{{ $project->name }}</h5>
                     <p class="line-clamp-3 whitespace-pre-wrap">{{ $project->description }}</p>
+                    <div class='mt-auto text-right'>
+                        <p class='text-sm'>{{ $project->updated_at }}</p>
+                    </div>
                 </x-card>
             @endforeach
         </div>

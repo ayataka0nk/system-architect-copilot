@@ -16,7 +16,6 @@
     ]" />
 
     <section class='p-4'>
-
         <form action="{{ route('projects.update', $project) }}" method="post">
             @csrf
             @method('PUT')
