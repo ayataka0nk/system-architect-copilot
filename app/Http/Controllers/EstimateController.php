@@ -84,14 +84,15 @@ class EstimateController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $values = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
+        ]);
         $estimate = Estimate::with([
             'project',
             'featureGroups.featureCategories.features'
         ])->findOrFail($id);
-        $estimate->update([
-            'name' => $request->name,
-            'description' => $request->description,
-        ]);
+        $estimate->update($values);
         return redirect()->route('estimates.show', $estimate->id);
     }
 

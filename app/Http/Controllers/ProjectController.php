@@ -65,10 +65,11 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $project->update([
-            'name' => $request->name,
-            'description' => $request->description,
+        $values = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable',
         ]);
+        $project->update($values);
 
         return redirect()->route('projects.show', ['project' => $project]);
     }

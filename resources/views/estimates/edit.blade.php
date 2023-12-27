@@ -26,8 +26,8 @@
         <form action="{{ route('estimates.update', $estimate->id) }}" method="post">
             @csrf
             @method('PUT')
-            <x-text-field label="name" name='name' :value="$estimate->name" :error="$errors->first('name')" />
-            <x-text-field multiline label="description" name='description' :value="$estimate->description" :error="$errors->first('description')" />
+            <x-text-field label="name" name='name' :value="old('name', $estimate->name)" :error="$errors->first('name')" />
+            <x-text-field multiline label="description" name='description' :value="old('description', $estimate->description)" :error="$errors->first('description')" />
             <x-button type='submit'>保存する</x-button>
         </form>
     </section>
