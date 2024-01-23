@@ -117,13 +117,13 @@
 @if ($href)
     <a {{ $attributes->class($buttonBaseClasses) }} href="{{ $href }}">
         <div @class(array_merge($wrapperBaseClasses, $variantClasses, $actionClasses))>
-            <x-icon :name="$iconName" class="h-6 w-6" />
+            <x-icon :name="$iconName" @class([$iconClass, 'h-6 w-6']) />
         </div>
     </a>
 @else
     <button {{ $attributes->class($buttonBaseClasses) }}>
         <div @class(array_merge($wrapperBaseClasses, $variantClasses, $actionClasses))>
-            <x-icon :name="$iconName" class="h-6 w-6" />
+            <x-icon :name="$iconName" @class([$iconClass, 'h-6 w-6']) />
         </div>
     </button>
 @endif

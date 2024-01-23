@@ -11,7 +11,7 @@
         ['name' => $estimate->name],
     ]" />
     <section class='p-2'>
-        <header class='flex items-center justify-between'>
+        <header class='flex items-center'>
             <h2 class='text-2xl font-bold'>{{ $estimate->name }}</h2>
             <x-icon-button icon='pencil-square' :href="route('estimates.edit', $estimate->id)" />
         </header>

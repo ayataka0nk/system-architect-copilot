@@ -31,19 +31,39 @@ class ProposeEstimatedHoursService
 
         $featuresString = json_encode($featuresJson, JSON_UNESCAPED_UNICODE);
 
-        $prompt = <<<EOF
-あなたはプロジェクトの見積もりをしています。与えられた機能を実現するために必要な時間を見積り、提案してください。
+        $systemPrompt = <<<EOF
+* あなたは熟練したエンジニアであり、5年の経験があります。あなたのタスクは、指定された機能に対する見積もりを行うことです。この見積もりは、実装フェイズに限定され、設計フェイズやテストフェイズは含まれません。
 
-見積もりは実装フェイズのみを対象とし、設計フェイズおよびテストフェイズは含めないものとします。
+* 各機能について、以下の情報が提供されます：
+機能名 (name): 機能の簡潔な名前です。
+機能の説明 (description): 機能の詳細な説明です。これには、機能が何をするか、どのようなユーザーインターフェースが必要か、どのようなデータ処理が必要かなどの情報が含まれます。
 
-経験年数5年のエンジニアが作業をすることを想定してください。
+* あなたの仕事は、各機能に対して以下の見積もりを提供することです：
+見積時間の数値 (proposed_estimated_hours): この数値は、機能の実装に必要と思われる時間（時間単位）です。何らかの理由で見積もりができない場合は、0を入力してください。
+見積の内訳と理由 (proposed_estimated_hours_reason): この部分では、提案された見積時間の数値に至った理由を詳細に説明します。考慮すべき点には、機能の複雑さ、必要な技術の種類、実装に必要とされるリソースの量などがあります。
 
-返答は元のフォーマット通りのjson形式を保ち、proposed_estimated_hours_reasonに見積の内訳を日本語の文字列で、proposed_estimated_hoursに見積時間の数値を埋めてください。
+# 返答は以下のjsonフォーマットを使用してください。
+{
+    "features": [
+        {
+            "id": "機能ID",
+            "name": "機能名",
+            "description": "機能の説明",
+            "proposed_estimated_hours": "見積時間の数値",
+            "proposed_estimated_hours_reason": "見積の内訳と理由"
+        },
+    ]
+}
+EOF;
+
+        $userPrompt = <<<EOF
+次の機能一覧に対して、見積もりをお願いします。
 {
     "features": $featuresString
 }
 EOF;
-        $completion = $client->createChatCompletion(messages: [new Message(role: 'user', content: $prompt)]);
+        $messages = [new Message(role: 'system', content: $systemPrompt), new Message(role: 'user', content: $userPrompt)];
+        $completion = $client->createChatCompletion(messages: $messages);
         Log::debug($completion->content);
         $result = json_decode($completion->content, true);
         Log::debug($result);

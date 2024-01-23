@@ -13,7 +13,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::orderby('updated_at', 'desc')
-            ->paginate(6);
+            ->paginate(5);
         return view('projects.index', [
             'projects' => $projects,
         ]);

@@ -19,7 +19,7 @@
             <p x-show="proposedEstimatedHours" class='font-bold italic text-primary'>
                 {{ $feature->proposed_estimated_hours }} h
             </p>
-            <x-icon-button x-show="proposedEstimatedHours" icon="check"
+            <x-icon-button x-show="proposedEstimatedHours" icon="check" iconClass='text-green-700'
                 x-on:click="
                 axios.put('{{ route('features.approve-proposed-estimated-hours', $feature->id) }}')
                 estimatedHours = proposedEstimatedHours;
@@ -27,15 +27,14 @@
                 proposedEstimatedHours = null;
                 proposedEstimatedHoursReason = null;
                 " />
-            <x-icon-button x-show="proposedEstimatedHours" icon="x-mark"
+            <x-icon-button x-show="proposedEstimatedHours" icon="x-mark" iconClass='text-red-700'
                 x-on:click="
                 axios.put('{{ route('features.reject-proposed-estimated-hours', $feature->id) }}')
                 proposedEstimatedHours = null;
                 proposedEstimatedHoursReason = null;
                 " />
         </div>
-        <p x-show="estimatedHoursReason" @class(['text-on-surface-variant'])
-            x-bind:class="{ 'text-primary font-bold italic': proposedEstimatedHours }" x-text="estimatedHoursReason">
+        <p x-show="estimatedHoursReason" @class(['text-on-surface-variant']) x-text="estimatedHoursReason">
         </p>
         <p x-show="proposedEstimatedHoursReason" @class(['text-on-surface-variant'])
             x-bind:class="{ 'text-primary font-bold italic': proposedEstimatedHours }"

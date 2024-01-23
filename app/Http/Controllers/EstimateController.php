@@ -16,7 +16,7 @@ class EstimateController extends Controller
         $project = Project::with(['estimates'])->findOrFail($projectId);
         $estimates = Estimate::where('project_id', $projectId)
             ->orderBy('updated_at', 'desc')
-            ->paginate(6);
+            ->paginate(5);
         return view('estimates.index', [
             'project' => $project,
             'estimates' => $estimates,
