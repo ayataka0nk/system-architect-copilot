@@ -33,8 +33,3 @@ Route::resource('feature-categories.features', \App\Http\Controllers\FeatureCont
 Route::middleware('auth')->get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/sandbox', [\App\Http\Controllers\SandboxController::class, 'top'])->name('sandbox');
-
-
-// sample
-
-Route::get('/counter', \App\Livewire\Counter::class);
