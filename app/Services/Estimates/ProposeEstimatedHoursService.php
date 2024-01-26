@@ -3,9 +3,9 @@
 namespace App\Services\Estimates;
 
 use App\Adapters\LanguageModelClient\LanguageModelClientFactory;
-use App\Adapters\LanguageModelClient\Message;
 use App\Models\FeatureCategory;
 use Illuminate\Support\Facades\Log;
+use OpenAI;
 
 class ProposeEstimatedHoursService
 {
@@ -49,24 +49,35 @@ class ProposeEstimatedHoursService
             "id": "機能ID",
             "name": "機能名",
             "description": "機能の説明",
+            "proposed_estimated_hours_reason": "見積の内訳と理由",
             "proposed_estimated_hours": "見積時間の数値",
-            "proposed_estimated_hours_reason": "見積の内訳と理由"
         },
     ]
 }
 EOF;
 
         $userPrompt = <<<EOF
-次の機能一覧に対して、見積もりをお願いします。
+次の機能一覧に対して、見積もりを日本語でお願いします。
 {
     "features": $featuresString
 }
 EOF;
-        $messages = [new Message(role: 'system', content: $systemPrompt), new Message(role: 'user', content: $userPrompt)];
-        $completion = $client->createChatCompletion(messages: $messages);
-        Log::debug($completion->content);
-        $result = json_decode($completion->content, true);
-        Log::debug($result);
-        return collect($result['features']);
+        $messages = [
+            ['role' => 'system', 'content' => $systemPrompt],
+            ['role' => 'user', 'content' => $userPrompt]
+        ];
+
+        $client = OpenAI::client(config('app.open_ai_api_key'));
+        $result = $client->chat()->create([
+            'model' => 'gpt-4-1106-preview',
+            'messages' => $messages,
+            'response_format' => ['type' => 'json_object'],
+            'temperature' => 0.0,
+        ]);
+        $completion = $result->choices[0]->message->content;
+        Log::debug($completion);
+        $completionJson = json_decode($completion, true);
+        Log::debug($completionJson);
+        return collect($completionJson['features']);
     }
 }
