@@ -1,6 +1,8 @@
 <x-layouts.user title='dashboard'>
-    <div>
+    <x-toolbar title='ダッシュボード'>
+    </x-toolbar>
+    <div class="p-4">
         <!-- Well begun is half done. - Aristotle -->
-        <a href="{{ route('projects.index') }}">プロジェクト一覧</a>
+        <x-button :href="route('projects.index')">プロジェクト一覧</x-button>
     </div>
 </x-layouts.user>

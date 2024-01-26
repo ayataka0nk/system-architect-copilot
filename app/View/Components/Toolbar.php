@@ -12,9 +12,9 @@ class Toolbar extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public string $prevName,
-        public string $prevLink,
-        public string $title
+        public string $title,
+        public ?string $prevName = null,
+        public ?string $prevLink = null
     ) {
         //
     }

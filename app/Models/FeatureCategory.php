@@ -25,4 +25,13 @@ class FeatureCategory extends Model
     {
         return $this->hasMany(Feature::class);
     }
+
+    public function nextFeatureSequence()
+    {
+        if ($this->features->isNotEmpty()) {
+            return $this->features->last()->sequence + 1;
+        } else {
+            return 0;
+        }
+    }
 }

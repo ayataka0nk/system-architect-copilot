@@ -3,7 +3,7 @@
     </x-toolbar>
     <x-breadcrumbs :items="[['name' => 'プロジェクト一覧', 'url' => route('projects.index')], ['name' => $project->name]]" />
     <section class='p-4'>
-        <header class='flex items-center justify-between text-2xl font-bold'>
+        <header class='flex items-center text-2xl font-bold'>
             <h1>{{ $project->name }}</h1>
             <x-icon-button icon='pencil-square' :href="route('projects.edit', $project->id)" />
         </header>

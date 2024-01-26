@@ -31,7 +31,7 @@
         <div class='py-2'>
             <x-button icon='plus' variant='text' :href="route('feature-categories.features.create', [
                 $featureCategory->id,
-                'sequence' => $featureCategory->features->last()->sequence + 1,
+                'sequence' => $featureCategory->nextFeatureSequence(),
             ])">機能追加</x-button>
         </div>
     </section>
